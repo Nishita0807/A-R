@@ -12,12 +12,15 @@
     arjs="sourceType: image; debugUIEnabled: false; trackingMethod: best;"
   >
     <!-- Use the Hiro marker pattern directly as a simulated marker -->
-    <a-marker
-      type="pattern"
-      url="https://cdn.jsdelivr.net/gh/jeromeetienne/ar.js@2.0.1/three.js/examples/marker-training/examples/HIRO.patt"
-      id="marker"
-      emitevents="true"
-    >
+   <a-marker type="pattern" url="markers/hiro.patt" id="marker">
+  <a-entity
+    id="animatedModel"
+    position="0 0 0"
+    rotation="0 0 0"
+    scale="0.5 0.5 0.5"
+    gltf-model="models/scene.gltf"
+  ></a-entity>
+</a-marker>
       <!-- 3D Model -->
       <a-entity
         id="animatedModel"
