@@ -3,25 +3,15 @@
 <head>
   <link rel="icon" href="data:," />
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-  <!-- Import AR.js with marker support -->
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.min.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
   <a-scene
     embedded
-    arjs="sourceType: image; debugUIEnabled: false; trackingMethod: best;"
+    arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
   >
-    <!-- Use the Hiro marker pattern directly as a simulated marker -->
-   <a-marker type="pattern" url="markers/hiro.patt" id="marker">
-  <a-entity
-    id="animatedModel"
-    position="0 0 0"
-    rotation="0 0 0"
-    scale="0.5 0.5 0.5"
-    gltf-model="models/scene.gltf"
-  ></a-entity>
-</a-marker>
-      <!-- 3D Model -->
+    <!-- Correct marker path -->
+    <a-marker type="pattern" url="markers/hiro.patt" id="marker">
       <a-entity
         id="animatedModel"
         position="0 0 0"
@@ -36,15 +26,8 @@
   </a-scene>
 
   <script>
-    const animatedModel = document.querySelector("#animatedModel");
-
-    // Automatically show the model on page load without scanning a physical marker
     window.addEventListener("load", () => {
-      console.log("Auto-detecting marker...");
-      setTimeout(() => {
-        animatedModel.setAttribute("visible", "true");
-        console.log("Model displayed automatically.");
-      }, 1000); // Delay to simulate marker detection
+      console.log("Page loaded. Waiting for marker detection...");
     });
   </script>
 </body>
