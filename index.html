@@ -9,14 +9,15 @@
   <!-- AR.js Scene -->
   <a-scene
     embedded
-    arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: image;"
+    arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: marker; markerHandler: true;"
   >
     <!-- Image Tracking -->
     <a-nft
       type="nft"
-      url="markers/hiro"
+      url="markers/hiro.patt"
       smooth="true"
       id="marker"
+      visible="false"
     >
       <!-- 3D Model -->
       <a-entity
@@ -33,14 +34,21 @@
   </a-scene>
 
   <script>
-    // Log when the marker is detected
-    const marker = document.querySelector("#marker");
-    marker.addEventListener("markerFound", () => {
-      console.log("Marker found!");
-    });
+    // When the AR scene starts, trigger the detection of the Hiro marker directly
+    window.addEventListener('load', function () {
+      const marker = document.querySelector("#marker");
+      
+      // Force the marker to be considered found by the AR.js camera system
+      marker.setAttribute('visible', 'true');
+      
+      // Optionally, log when the marker is detected automatically
+      marker.addEventListener("markerFound", () => {
+        console.log("Marker found automatically!");
+      });
 
-    marker.addEventListener("markerLost", () => {
-      console.log("Marker lost!");
+      marker.addEventListener("markerLost", () => {
+        console.log("Marker lost!");
+      });
     });
   </script>
 </body>
