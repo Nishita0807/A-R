@@ -9,15 +9,14 @@
   <!-- AR.js Scene -->
   <a-scene
     embedded
-    arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: marker; markerHandler: true;"
+    arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
   >
-    <!-- Image Tracking -->
-    <a-nft
-      type="nft"
+    <!-- Marker-Based Tracking -->
+    <a-marker
+      type="pattern"
       url="./markers/hiro.patt"
-      smooth="true"
       id="marker"
-      visible="false"
+      smooth="true"
     >
       <!-- 3D Model -->
       <a-entity
@@ -27,19 +26,16 @@
         scale="0.5 0.5 0.5"
         gltf-model="./models/scene.gltf"
       ></a-entity>
-    </a-nft>
+    </a-marker>
 
     <!-- Camera -->
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
-    // Automatically trigger the marker detection
+    // Automatically simulate marker detection
     window.addEventListener("load", function () {
       const marker = document.getElementById("marker");
-
-      // Simulate marker being visible when the page loads
-      marker.setAttribute("visible", "true");
 
       marker.addEventListener("markerFound", () => {
         console.log("Marker found automatically!");
