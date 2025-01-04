@@ -6,12 +6,19 @@
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.min.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
+  <!-- AR.js Scene -->
   <a-scene
     embedded
-    arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
+    arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: image;"
   >
-    <!-- Correct marker path -->
-    <a-marker type="pattern" url="markers/hiro.patt" id="marker">
+    <!-- Image Tracking -->
+    <a-nft
+      type="nft"
+      url="markers/hiro"
+      smooth="true"
+      id="marker"
+    >
+      <!-- 3D Model -->
       <a-entity
         id="animatedModel"
         position="0 0 0"
@@ -19,15 +26,21 @@
         scale="0.5 0.5 0.5"
         gltf-model="models/scene.gltf"
       ></a-entity>
-    </a-marker>
+    </a-nft>
 
     <!-- Camera -->
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
-    window.addEventListener("load", () => {
-      console.log("Page loaded. Waiting for marker detection...");
+    // Log when the marker is detected
+    const marker = document.querySelector("#marker");
+    marker.addEventListener("markerFound", () => {
+      console.log("Marker found!");
+    });
+
+    marker.addEventListener("markerLost", () => {
+      console.log("Marker lost!");
     });
   </script>
 </body>
