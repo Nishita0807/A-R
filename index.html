@@ -14,7 +14,7 @@
     <!-- Image Tracking -->
     <a-nft
       type="nft"
-      url="markers/hiro.patt"
+      url="./markers/hiro.patt"
       smooth="true"
       id="marker"
       visible="false"
@@ -25,7 +25,7 @@
         position="0 0 0"
         rotation="0 0 0"
         scale="0.5 0.5 0.5"
-        gltf-model="models/scene.gltf"
+        gltf-model="./models/scene.gltf"
       ></a-entity>
     </a-nft>
 
@@ -36,7 +36,7 @@
   <script>
     // Automatically trigger the marker detection
     window.addEventListener("load", function () {
-      const marker = document.querySelector("#marker");
+      const marker = document.getElementById("marker");
 
       // Simulate marker being visible when the page loads
       marker.setAttribute("visible", "true");
