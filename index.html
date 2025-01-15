@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="data:," />
+  <title>AR Floating 3D Model</title>
+  <!-- Include A-Frame and AR.js Libraries -->
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
-  <script src="https://unpkg.com/aframe-gesture-recognizer/dist/aframe-gesture-recognizer.js"></script> <!-- Gesture Recognizer library -->
+  <script src="https://unpkg.com/aframe-gesture-recognizer/dist/aframe-gesture-recognizer.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
   <!-- AR.js Scene -->
@@ -19,34 +23,45 @@
       id="marker"
       smooth="true"
     >
-      <!-- 3D Model with touch interaction (rotation, zoom, drag) -->
-      <a-entity
-        id="animatedModel"
-        position="0 1 0"
-        rotation="0 0 0"
-        scale="0.5 0.5 0.5"
-        gltf-model="./models/scene.gltf"
-        gesture-handler
-        draggable
-        pinch-zoom
-      ></a-entity>
+      <!-- Hidden Empty Entity to Detect Marker -->
+      <a-entity id="markerEntity" position="0 0 0" visible="false"></a-entity>
     </a-marker>
+
+    <!-- Floating 3D Model -->
+    <a-entity
+      id="floatingModel"
+      position="0 1 -2" <!-- Fixed position relative to the camera -->
+      rotation="0 0 0"
+      scale="0.5 0.5 0.5"
+      gltf-model="./models/scene.gltf"
+      gesture-handler
+      draggable
+      pinch-zoom
+      visible="false"
+    ></a-entity>
+
+    <!-- Lighting -->
+    <a-light type="directional" position="0 5 -2" intensity="1"></a-light>
+    <a-light type="ambient" color="#ffffff"></a-light>
 
     <!-- Camera -->
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
-    // Automatically simulate marker detection
     window.addEventListener("load", function () {
       const marker = document.getElementById("marker");
+      const floatingModel = document.getElementById("floatingModel");
 
+      // Show the floating model when the marker is detected
       marker.addEventListener("markerFound", () => {
-        console.log("Marker found automatically!");
+        console.log("Marker found!");
+        floatingModel.setAttribute("visible", "true");
       });
 
+      // Keep the floating model visible even when the marker is lost
       marker.addEventListener("markerLost", () => {
-        console.log("Marker lost!");
+        console.log("Marker lost, but model remains visible!");
       });
     });
   </script>
