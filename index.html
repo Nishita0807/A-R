@@ -30,9 +30,9 @@
     <!-- Floating 3D Model -->
     <a-entity
       id="floatingModel"
-      position="0 1 -2" <!-- Fixed position relative to the camera -->
-      rotation="0 0 0"
-      scale="0.5 0.5 0.5"
+      position="0 1 -3" <!-- Adjust the position to avoid overlap -->
+      rotation="0 45 0"
+      scale="1 1 1" <!-- Increase the scale if the model appears too small -->
       gltf-model="./models/scene.gltf"
       gesture-handler
       draggable
@@ -41,11 +41,11 @@
     ></a-entity>
 
     <!-- Lighting -->
-    <a-light type="directional" position="0 5 -2" intensity="1"></a-light>
-    <a-light type="ambient" color="#ffffff"></a-light>
+    <a-light type="directional" position="0 5 -2" intensity="1.5"></a-light>
+    <a-light type="ambient" color="#ffffff" intensity="0.8"></a-light>
 
     <!-- Camera -->
-    <a-entity camera></a-entity>
+    <a-entity camera position="0 1.6 0"></a-entity>
   </a-scene>
 
   <script>
