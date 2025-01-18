@@ -1,44 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dubai AR Card</title>
   <link rel="icon" href="data:," />
+  
+  <!-- A-Frame & AR.js -->
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.min.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
+  
   <a-scene
     embedded
     arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
   >
-    <!-- Use Custom Hiro Marker -->
+    <!-- Use Custom Dubai Marker -->
     <a-marker type="pattern" url="markers/hiro.patt" id="marker">
-      <a-entity
-        id="animatedModel"
+      <!-- 3D Model (Example: Burj Khalifa or any GLTF model) -->
+      <a-entity 
+        id="dubaiModel"
         position="0 0 0"
-        rotation="0 0 0"
-        scale="0.5 0.5 0.5"
+        scale="1 1 1"
+        rotation="0 180 0"
         gltf-model="models/scene.gltf"
         visible="false"
       ></a-entity>
     </a-marker>
 
-    <!-- Camera -->
+    <!-- AR Camera -->
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
     const marker = document.querySelector("#marker");
-    const animatedModel = document.querySelector("#animatedModel");
+    const dubaiModel = document.querySelector("#dubaiModel");
 
     marker.addEventListener("markerFound", () => {
-      console.log("Marker detected!");
-      animatedModel.setAttribute("visible", "true");
+      console.log("Dubai AR Card Detected!");
+      dubaiModel.setAttribute("visible", "true");
     });
 
     marker.addEventListener("markerLost", () => {
-      console.log("Marker lost!");
-      animatedModel.setAttribute("visible", "false");
+      console.log("Dubai AR Card Lost!");
+      dubaiModel.setAttribute("visible", "false");
     });
   </script>
+
 </body>
 </html>
