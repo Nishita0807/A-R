@@ -10,8 +10,8 @@
     embedded
     arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
   >
-    <!-- Use Hiro marker preset -->
-    <a-marker preset="hiro" id="marker">
+    <!-- Use Custom Hiro Marker -->
+    <a-marker type="pattern" url="marker/hiro.patt" id="marker">
       <a-entity
         id="animatedModel"
         position="0 0 0"
