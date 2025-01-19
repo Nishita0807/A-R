@@ -18,6 +18,7 @@
         rotation="0 0 0"
         scale="1.5 1.5 1.5"
         gltf-model="models/scene.gltf"
+        animation__rotation="property: rotation; to: 0 360 0; dur: 5000; loop: true; easing: linear"
       >
         <!-- Floating Animation -->
         <a-animation attribute="position"
@@ -26,16 +27,6 @@
                      repeat="indefinite"
                      from="0 0.5 0"
                      to="0 0.8 0"></a-animation>
-
-        <!-- Continuous Rotation Animation -->
-        <a-animation id="rotateAnimation"
-                     attribute="rotation"
-                     from="0 0 0"
-                     to="0 360 0"
-                     dur="5000"
-                     easing="linear"
-                     repeat="indefinite">
-        </a-animation>
       </a-entity>
     </a-marker>
 
@@ -45,14 +36,14 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const model = document.getElementById("model");
-      const rotateAnimation = document.getElementById("rotateAnimation");
 
       let isRotating = true; // Rotation starts by default
 
       // Stop rotation on touch or click
       model.addEventListener("click", () => {
         if (isRotating) {
-          rotateAnimation.setAttribute("repeat", "0"); // Stop rotation
+          // Stop the animation by removing it
+          model.removeAttribute("animation__rotation");
           isRotating = false;
         }
       });
