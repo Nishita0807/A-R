@@ -7,28 +7,56 @@
 </head>
 <body style="margin: 0px; overflow: hidden">
   <a-scene embedded arjs>
-    <!-- Lighting for realistic appearance -->
+    <!-- Lighting for better visuals -->
     <a-light type="directional" position="1 2 1" intensity="1.5"></a-light>
     <a-light type="ambient" intensity="0.7"></a-light>
 
     <!-- Hiro marker -->
     <a-marker type="pattern" url="markers/hiro.patt">
-      <a-entity
+      <a-entity id="model"
         position="0 0.5 0"
-        rotation="0 90 0"
+        rotation="0 0 0"
         scale="1.5 1.5 1.5"
         gltf-model="models/scene.gltf"
       >
+        <!-- Floating Animation -->
         <a-animation attribute="position"
                      dur="2000"
                      direction="alternate"
                      repeat="indefinite"
                      from="0 0.5 0"
                      to="0 0.8 0"></a-animation>
+
+        <!-- Continuous Rotation Animation -->
+        <a-animation id="rotateAnimation"
+                     attribute="rotation"
+                     from="0 0 0"
+                     to="0 360 0"
+                     dur="5000"
+                     easing="linear"
+                     repeat="indefinite">
+        </a-animation>
       </a-entity>
     </a-marker>
 
     <a-entity camera></a-entity>
   </a-scene>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const model = document.getElementById("model");
+      const rotateAnimation = document.getElementById("rotateAnimation");
+
+      let isRotating = true; // Rotation starts by default
+
+      // Stop rotation on touch or click
+      model.addEventListener("click", () => {
+        if (isRotating) {
+          rotateAnimation.setAttribute("repeat", "0"); // Stop rotation
+          isRotating = false;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
