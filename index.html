@@ -2,23 +2,33 @@
 <html>
 <head>
   <link rel="icon" href="data:," />
-
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-  <!-- Import AR.js with marker support -->
- <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
 </head>
 <body style="margin: 0px; overflow: hidden">
   <a-scene embedded arjs>
-      <!-- Use the Hiro marker for AR.js -->
-      <a-marker type="pattern" url="markers/hiro.patt">
-          <a-entity
-            position="0 0 0"
-            rotation="0 0 0"
-            scale="0.5 0.5 0.5"
-            gltf-model="models/scene.gltf" 
-          ></a-entity>
-      </a-marker>
-      <a-entity camera></a-entity>
+    <!-- Lighting for realistic appearance -->
+    <a-light type="directional" position="1 2 1" intensity="1.5"></a-light>
+    <a-light type="ambient" intensity="0.7"></a-light>
+
+    <!-- Hiro marker -->
+    <a-marker type="pattern" url="markers/hiro.patt">
+      <a-entity
+        position="0 0.5 0"
+        rotation="0 180 0"
+        scale="1.5 1.5 1.5"
+        gltf-model="models/scene.gltf"
+      >
+        <a-animation attribute="position"
+                     dur="2000"
+                     direction="alternate"
+                     repeat="indefinite"
+                     from="0 0.5 0"
+                     to="0 0.8 0"></a-animation>
+      </a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
   </a-scene>
 </body>
 </html>
